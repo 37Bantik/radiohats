@@ -12,7 +12,7 @@ const { Title, Paragraph } = Typography;
 export default function CompanyPage() {
   return (
     <SectionWrapper>
-      <PageTitle subtitle="Крупный телеком-оператор, где проектировщик — ключевая фигура">
+      <PageTitle subtitle="Крупный телеком-оператор, где проектировщик — одна из ключевых фигур">
         {companyInfo.name}
       </PageTitle>
 
