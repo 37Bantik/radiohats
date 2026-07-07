@@ -15,7 +15,10 @@ import {
   BankOutlined,
   QuestionCircleOutlined,
   TeamOutlined,
+  SunOutlined,
+  MoonOutlined,
 } from "@ant-design/icons";
+import { useTheme } from "./ThemeContext";
 
 const menuItems = [
   { key: "/", icon: <HomeOutlined />, label: <Link href="/">Главная</Link> },
@@ -64,9 +67,13 @@ const menuItems = [
 export function Header() {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header
+      className="sticky top-0 z-50 shadow-sm"
+      style={{ background: "var(--header-bg)" }}
+    >
       {/* Top row: title + hamburger */}
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link
@@ -76,16 +83,29 @@ export function Header() {
           Инженер-проектировщик
         </Link>
 
-        <Button
-          type="text"
-          icon={<MenuOutlined className="text-xl" />}
-          className="md:hidden"
-          onClick={() => setDrawerOpen(true)}
-        />
+        <div className="flex items-center gap-2">
+          {/* Theme toggle — always visible */}
+          <Button
+            type="text"
+            icon={theme === "light" ? <MoonOutlined /> : <SunOutlined />}
+            onClick={toggleTheme}
+          />
+
+          {/* Mobile hamburger */}
+          <Button
+            type="text"
+            icon={<MenuOutlined className="text-xl" />}
+            className="md:hidden"
+            onClick={() => setDrawerOpen(true)}
+          />
+        </div>
       </div>
 
       {/* Desktop menu row */}
-      <div className="hidden border-t border-gray-100 md:block">
+      <div
+        className="hidden border-t md:block"
+        style={{ borderColor: "var(--header-border)" }}
+      >
         <div className="mx-auto max-w-6xl">
           <Menu
             mode="horizontal"
