@@ -67,29 +67,34 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-6xl items-center px-4">
+      {/* Top row: title centered, hamburger on mobile */}
+      <div className="relative mx-auto flex max-w-6xl items-center justify-center px-4 py-3 md:justify-between">
         <Link
           href="/"
-          className="mr-4 text-lg font-bold whitespace-nowrap text-blue-600"
+          className="text-lg font-bold text-blue-600 md:text-xl"
         >
           Инженер-проектировщик
         </Link>
 
-        {/* Desktop menu */}
-        <Menu
-          mode="horizontal"
-          selectedKeys={[pathname]}
-          items={menuItems}
-          className="hidden flex-1 border-b-0 md:flex"
-        />
-
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — absolute right */}
         <Button
           type="text"
           icon={<MenuOutlined />}
-          className="ml-auto md:hidden"
+          className="absolute right-4 top-1/2 -translate-y-1/2 md:hidden"
           onClick={() => setDrawerOpen(true)}
         />
+      </div>
+
+      {/* Desktop menu row */}
+      <div className="hidden border-t border-gray-100 md:block">
+        <div className="mx-auto max-w-6xl">
+          <Menu
+            mode="horizontal"
+            selectedKeys={[pathname]}
+            items={menuItems}
+            className="border-b-0 justify-center"
+          />
+        </div>
       </div>
 
       {/* Mobile drawer */}
