@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menu } from "antd";
+import { Menu, Drawer, Button } from "antd";
 import {
+  MenuOutlined,
   HomeOutlined,
   InfoOutlined,
   UnorderedListOutlined,
@@ -61,23 +63,50 @@ const menuItems = [
 
 export function Header() {
   const pathname = usePathname();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center px-4">
         <Link
           href="/"
-          className="mr-6 text-lg font-bold whitespace-nowrap text-blue-600"
+          className="mr-4 text-lg font-bold whitespace-nowrap text-blue-600"
         >
           Инженер-проектировщик
         </Link>
+
+        {/* Desktop menu */}
         <Menu
           mode="horizontal"
           selectedKeys={[pathname]}
           items={menuItems}
-          className="flex-1 border-b-0"
+          className="hidden flex-1 border-b-0 md:flex"
+        />
+
+        {/* Mobile hamburger */}
+        <Button
+          type="text"
+          icon={<MenuOutlined />}
+          className="ml-auto md:hidden"
+          onClick={() => setDrawerOpen(true)}
         />
       </div>
+
+      {/* Mobile drawer */}
+      <Drawer
+        title="Навигация"
+        placement="right"
+        onClose={() => setDrawerOpen(false)}
+        open={drawerOpen}
+        width={280}
+      >
+        <Menu
+          mode="vertical"
+          selectedKeys={[pathname]}
+          items={menuItems}
+          onClick={() => setDrawerOpen(false)}
+        />
+      </Drawer>
     </header>
   );
 }
