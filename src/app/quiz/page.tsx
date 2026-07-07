@@ -11,6 +11,7 @@ import {
 import { PageTitle } from "@/components/shared/PageTitle";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
 import { quizQuestions } from "@/data/quiz";
+import { useTheme } from "@/components/layout/ThemeContext";
 
 const { Title, Paragraph } = Typography;
 
@@ -21,6 +22,8 @@ export default function QuizPage() {
     new Array(quizQuestions.length).fill(null)
   );
   const [showResult, setShowResult] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const question = quizQuestions[current];
   const isAnswered = selected !== null;
@@ -105,11 +108,23 @@ export default function QuizPage() {
 
         {isAnswered && (
           <div
-            className={`mt-4 rounded-lg p-3 ${
-              isCorrect
-                ? "bg-green-50 text-green-800"
-                : "bg-red-50 text-red-800"
-            }`}
+            className="mt-4 rounded-lg p-3 transition-colors"
+            style={{
+              background: isDark
+                ? isCorrect
+                  ? "#1a2e1a"
+                  : "#2e1a1a"
+                : isCorrect
+                  ? "#f0fdf4"
+                  : "#fef2f2",
+              color: isDark
+                ? isCorrect
+                  ? "#86efac"
+                  : "#fca5a5"
+                : isCorrect
+                  ? "#166534"
+                  : "#991b1b",
+            }}
           >
             {isCorrect ? (
               <span>
