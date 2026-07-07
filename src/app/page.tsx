@@ -7,6 +7,7 @@ import {
   RocketOutlined,
 } from "@ant-design/icons";
 import { SectionWrapper } from "@/components/shared/SectionWrapper";
+import { useTheme } from "@/components/layout/ThemeContext";
 
 const { Title, Paragraph } = Typography;
 
@@ -49,8 +50,17 @@ const previewCards = [
 ];
 
 export default function HomePage() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
-    <div className="bg-gradient-to-b from-blue-50 to-white">
+    <div
+      style={{
+        background: isDark
+          ? "linear-gradient(to bottom, #0a0a0a, #111)"
+          : "linear-gradient(to bottom, #eff6ff, #fff)",
+      }}
+    >
       <SectionWrapper className="pt-20 pb-16 text-center">
         <RocketOutlined className="text-6xl text-blue-500 mb-6" />
         <Title level={1} className="!mb-4">
