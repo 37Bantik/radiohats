@@ -67,8 +67,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      {/* Top row: title centered, hamburger on mobile */}
-      <div className="relative mx-auto flex max-w-6xl items-center justify-center px-4 py-3 md:justify-between">
+      {/* Top row: title + hamburger */}
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link
           href="/"
           className="text-lg font-bold text-blue-600 md:text-xl"
@@ -76,11 +76,10 @@ export function Header() {
           Инженер-проектировщик
         </Link>
 
-        {/* Mobile hamburger — absolute right */}
         <Button
           type="text"
-          icon={<MenuOutlined />}
-          className="absolute right-4 top-1/2 -translate-y-1/2 md:hidden"
+          icon={<MenuOutlined className="text-xl" />}
+          className="md:hidden"
           onClick={() => setDrawerOpen(true)}
         />
       </div>
